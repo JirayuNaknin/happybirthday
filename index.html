@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Kanit',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff6b81,#ff9ff3,#feca57);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    text-align:center;
+    color:white;
+    z-index:10;
+    padding: 20px;
+}
+
+h1{
+    font-size:4rem;
+    animation:pop 1s ease;
+}
+
+h2{
+    margin-top:15px;
+    font-size:2rem;
+    font-weight:300;
+}
+
+.message{
+    margin-top:30px;
+    max-width:700px;
+    font-size:1.2rem;
+    line-height:1.8;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:25px;
+    border-radius:20px;
+}
+
+button{
+    margin-top:35px;
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    font-size:1.1rem;
+    cursor:pointer;
+    background:white;
+    color:#ff4d6d;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    animation:float linear infinite;
+    opacity:.8;
+    pointer-events:none;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+    }
+    to{
+        transform:translateY(-10vh);
+    }
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.5);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@keyframes revealIn{
+    0%{
+        transform:scale(.3) translateY(40px);
+        opacity:0;
+    }
+    60%{
+        transform:scale(1.08) translateY(-6px);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1) translateY(0);
+        opacity:1;
+    }
+}
+
+@keyframes glow{
+    0%,100%{
+        text-shadow:0 0 10px rgba(255,255,255,.6);
+    }
+    50%{
+        text-shadow:0 0 25px rgba(255,255,255,1),0 0 40px rgba(255,105,180,.8);
+    }
+}
+
+@keyframes clickPulse{
+    0%{
+        transform:scale(1);
+    }
+    40%{
+        transform:scale(.88);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+.reveal-animate{
+    animation:revealIn .8s cubic-bezier(.34,1.56,.64,1) forwards,
+              glow 2s ease-in-out infinite .8s;
+}
+
+.btn-clicked{
+    animation:clickPulse .4s ease;
+}
+
+.hidden{
+    display:none;
+}
+
+.photo{
+    margin-top:20px;
+    width:220px;
+    max-width: 80vw;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,.3);
+}
+
+/* ปุ่มเล็ก ๆ มุมจอ สำหรับเปิด/ปิดเสียง (เผื่อเบราว์เซอร์บล็อกเสียงตอนโหลด) */
+.mute-btn{
+    position:fixed;
+    top:16px;
+    right:16px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(255,255,255,.25);
+    color:white;
+    font-size:1.2rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:20;
+    border:none;
+    margin:0;
+    padding:0;
+}
+</style>
+</head>
+<body>
+
+<!-- ปุ่มปิด/เปิดเสียงลอยมุมจอ (แสดงหลังกดเซอร์ไพรส์) -->
+<button id="muteBtn" class="mute-btn hidden" onclick="toggleMute()">🔊</button>
+
+<!-- แท็กเสียง: ให้เปลี่ยน src เป็นไฟล์เพลงของคุณเอง -->
+<audio id="bgMusic" preload="auto">
+    <source src="gift.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<h1>🎉 Happy Birthday 🎂</h1>
+
+<h2>ถึงคนพิเศษของเค้า ❤️</h2>
+
+<div class="message">
+สุขสันต์วันเกิดนะคนเก่ง ❤️<br><br>
+
+ขอให้วันนี้เป็นวันที่เต็มไปด้วยรอยยิ้ม
+มีความสุขกับทุกช่วงเวลา
+ขอให้สิ่งที่ตั้งใจไว้สำเร็จทุกอย่าง
+สุขภาพแข็งแรง และเจอแต่เรื่องดี ๆ
+
+<br><br>
+
+รักนะ 💕
+</div>
+
+<button id="surpriseBtn" onclick="showLove()">กดรับเซอร์ไพรส์ 🎁</button>
+
+<div id="love" class="hidden">
+    <h2 style="margin-top:30px">
+        💖 I Love You Forever 💖
+    </h2>
+
+    <!-- เปลี่ยนเป็นรูปของคุณได้ -->
+    <img src="c:\Jirayu\a\code\HBD\1ddc1703374fabb5fd617462254c1ffe.jpg" class="photo">
+
+</div>
+
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+const muteBtn = document.getElementById("muteBtn");
+
+// ⏱️ ตั้งค่าท่อนเพลงที่ต้องการเล่นตรงนี้ (หน่วยเป็นวินาที)
+const START_TIME = 62;   // เริ่มเล่นที่ 1:02
+// เล่นไปจนจบเพลงแล้วหยุด (ไม่วนซ้ำ)
+
+// 🔊 ตั้งค่าความดังเพลง (0 = เงียบสุด, 1 = ดังสุด)
+const VOLUME = 0.2;
+
+function showLove(){
+    const loveDiv = document.getElementById("love");
+    const btn = document.getElementById("surpriseBtn");
+
+    // เอฟเฟกต์ตอนกดปุ่ม
+    btn.classList.remove("btn-clicked");
+    void btn.offsetWidth; // reset animation ถ้ากดซ้ำ
+    btn.classList.add("btn-clicked");
+
+    // แสดงข้อความ + รูป พร้อม animation เด้งเข้ามา
+    loveDiv.classList.remove("hidden");
+    loveDiv.classList.remove("reveal-animate");
+    void loveDiv.offsetWidth; // reset animation ถ้ากดซ้ำ
+    loveDiv.classList.add("reveal-animate");
+
+    createHearts(120);
+    playMusic();
+}
+
+// ต้องเรียก play() จากภายใน event ที่ผู้ใช้กด (click/touch) เท่านั้น
+// ถึงจะเล่นเสียงได้บนมือถือ (iOS Safari / Chrome Android)
+function playMusic(){
+    music.volume = VOLUME;
+    music.muted = false;
+    music.currentTime = START_TIME;
+
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                muteBtn.classList.remove("hidden");
+                muteBtn.textContent = "🔊";
+            })
+            .catch(err => {
+                // ถ้าเบราว์เซอร์ยังบล็อก ให้แสดงปุ่มไว้กดเล่นซ้ำอีกครั้ง
+                muteBtn.classList.remove("hidden");
+                muteBtn.textContent = "▶️";
+                console.log("เล่นเพลงอัตโนมัติไม่สำเร็จ กดปุ่มมุมจอเพื่อเล่นเพลง:", err);
+            });
+    }
+}
+
+// เพลงมี loop=false อยู่แล้วโดยดีฟอลต์ (ไม่ได้ใส่ attribute loop ไว้)
+// จึงเล่นจากวินาทีที่ START_TIME ไปจนจบเพลงแล้วหยุดเองอัตโนมัติ ไม่วนซ้ำ
+
+function toggleMute(){
+    if (music.paused) {
+        music.play();
+        muteBtn.textContent = "🔊";
+    } else if (music.muted) {
+        music.muted = false;
+        muteBtn.textContent = "🔊";
+    } else {
+        music.muted = true;
+        muteBtn.textContent = "🔇";
+    }
+}
+
+function createHearts(num){
+
+for(let i=0;i<num;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="❤";
+
+heart.className="heart";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(15+Math.random()*35)+"px";
+
+heart.style.animationDuration=(4+Math.random()*6)+"s";
+
+heart.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(heart);
+
+}
+
+}
+</script>
+
+</body>
+</html>
